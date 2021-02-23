@@ -56,59 +56,67 @@ const Table:React.FC<proptype> = (props) =>{
                     </Tr>
                 </Thead>
                 <Tbody>
-                    {
-                        props.list && props.list.map( Property =>(
-                            
-                            <Tr>
+                    {props.list?.length !== undefined ? (
+                         
+                            props.list && props.list.map( Property =>(
                                 
-                                <Td colSpan= {2}>{Property.Name}</Td>
-                                <Td colSpan={4}>{Property.Address}</Td>
-                                <Td colSpan={1}>{Property.Price}</Td>
-                                <Td colSpan={1}>
-                                    <DivflexButton>
-                                        <Button onClick= {onOpenModal}>Edit</Button>
-                                        <Modal styles={{ overlay: { background: "#02020225" } }} open={open} onClose={onCloseModal} center>
-                
-                                            <div style={{width: "500px"}}>
-                                            <HeadingStyle>
-                                                <Heading name="Edit Property" />
-                                            </HeadingStyle>
-                                            <label>Name:</label>
-                                            <InputArea
-                                                type="text"
-                                                name="propertyname"
-                                                autoComplete="off"
-                                                required
-                                            />
-                                            
-                                            <label>Address:</label>
-                                            <InputArea
-                                                type="text"
-                                                name="propertyaddress"
-                                                autoComplete="off"
-                                                required
-                                            />
-                                            <label>Price:</label>
-                                            <InputArea
-                                                type="number"
-                                                name="propertyprice"
-                                                autoComplete="off"
-                                                required
-                                            />
-                                            
-                                            <RegisterButtonStyle type="submit" onClick={handleSave}> Save </RegisterButtonStyle>
-                                            </div>
-                                        
-                                        </Modal>
-                                        <DeleteButton onClick = {handleDelete}>Delete</DeleteButton>
-                                    </DivflexButton>
-                                        
-                                        
+                                <Tr>
                                     
-                                </Td>
-                            </Tr>
-                        ))
-                    }
+                                    <Td colSpan= {2}>{Property.Name}</Td>
+                                    <Td colSpan={4}>{Property.Address}</Td>
+                                    <Td colSpan={1}>{Property.Price}</Td>
+                                    <Td colSpan={1}>
+                                        <DivflexButton>
+                                            <Button onClick= {onOpenModal}>Edit</Button>
+                                            <Modal styles={{ overlay: { background: "#02020225" } }} open={open} onClose={onCloseModal} center>
+                    
+                                                <div style={{width: "500px"}}>
+                                                <HeadingStyle>
+                                                    <Heading name="Edit Property" />
+                                                </HeadingStyle>
+                                                <label>Name:</label>
+                                                <InputArea
+                                                    type="text"
+                                                    name="propertyname"
+                                                    autoComplete="off"
+                                                    required
+                                                />
+                                                
+                                                <label>Address:</label>
+                                                <InputArea
+                                                    type="text"
+                                                    name="propertyaddress"
+                                                    autoComplete="off"
+                                                    required
+                                                />
+                                                <label>Price:</label>
+                                                <InputArea
+                                                    type="number"
+                                                    name="propertyprice"
+                                                    autoComplete="off"
+                                                    required
+                                                />
+                                                
+                                                <RegisterButtonStyle type="submit" onClick={handleSave}> Save </RegisterButtonStyle>
+                                                </div>
+                                            
+                                            </Modal>
+                                            <DeleteButton onClick = {handleDelete}>Delete</DeleteButton>
+                                        </DivflexButton>
+                                            
+                                            
+                                        
+                                    </Td>
+                                </Tr>
+                            ))
+                        
+                    ) : (
+                        <Tr>
+                            <Td colSpan={8}>No properties</Td>
+                        </Tr>
+                    )}
+
+                    
                 </Tbody>    
             </TableStyle>     
         </>
