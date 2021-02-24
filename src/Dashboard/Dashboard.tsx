@@ -16,6 +16,7 @@ import { useHistory, useLocation } from 'react-router';
 import {users, properties} from '../db.json';
 import { Modal } from 'react-responsive-modal';
 import 'react-responsive-modal/styles.css';
+import ErrorStyle from '../Components/ErrorStyle/ErrorStyle';
 
 import HeadingStyle from '../Components/Heading/HeadingStyle';
 import InputArea from '../Components/InputArea/InputArea';
@@ -35,7 +36,8 @@ const Dashboard: React.FC = () => {
     const history = useHistory();
     const location = useLocation();
     const userEmail = location.state;
-
+    //console.log(location)
+    
 
     
     const [propertyState, setPropertyState] = useState(initialPropertyState);
@@ -50,6 +52,10 @@ const Dashboard: React.FC = () => {
     // }, [])
     // const loadUser = async () => {
     //     setPropertyState( prev =>({...prev, Email: userEmail}))
+    //     history.push({
+    //         pathname: '/dashboard',
+    //         state: userEmail
+    //     });
     // }
 
 
@@ -69,16 +75,18 @@ const Dashboard: React.FC = () => {
 
     const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) =>{
         
-        setPropertyState( prev => ({...prev, Email: userEmail}))
-        console.log(userEmail)
-        propertyState.Email = userEmail;
-        setOpen(false);
-        await axios.post(`http://localhost:3334/properties`, propertyState);
-        history.push({
-            pathname: '/dashboard',
-            state: userEmail
-        });
-    }
+        
+            setPropertyState( prev => ({...prev, Email: userEmail}))
+            console.log(userEmail)
+            propertyState.Email = userEmail;
+            setOpen(false);
+            await axios.post(`http://localhost:3334/properties`, propertyState);
+            history.push({
+                pathname: '/dashboard',
+                state: userEmail
+            });
+        }
+    
 
     const handleUserProfile = () =>{
         history.push({
@@ -106,6 +114,7 @@ const Dashboard: React.FC = () => {
                 <Modal styles={{ overlay: { background: "#02020250" } }} open={open} onClose={onCloseModal} center>
                 
                     <div style={{width: "500px"}}>
+                        
                     <HeadingStyle>
                         <Heading name="Add Property" />
                     </HeadingStyle>
@@ -114,6 +123,7 @@ const Dashboard: React.FC = () => {
                         type="text"
                         name="Name"
                         autoComplete="off"
+                       
                         required
                         onChange={handleInput}
                     />
@@ -123,6 +133,7 @@ const Dashboard: React.FC = () => {
                         type="text"
                         name="Address"
                         autoComplete="off"
+                        
                         required
                         onChange={handleInput}
                     />
@@ -131,11 +142,13 @@ const Dashboard: React.FC = () => {
                         type="number"
                         name="Price"
                         autoComplete="off"
+                        
                         required
                         onChange={handleInput}
                     />
                     
                     <RegisterButtonStyle type="submit" onClick={handleSubmit}> Submit </RegisterButtonStyle>
+                                                 
                     </div>
                 
                 </Modal>
