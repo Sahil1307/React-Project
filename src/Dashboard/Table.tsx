@@ -14,7 +14,6 @@ import HeadingStyle from '../Components/Heading/HeadingStyle';
 import InputArea from '../Components/InputArea/InputArea';
 import Heading from '../Components/Heading/heading_Components';
 import RegisterButtonStyle from '../Components/ButtonRegister/RegisterButtonStyle';
-import { rgbToHex } from '@material-ui/core';
 import {properties} from '../db.json';
 import axios from 'axios';
 import { useHistory, useLocation } from 'react-router';
